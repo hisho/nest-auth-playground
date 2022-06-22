@@ -10,23 +10,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator nestgraphql {
+  provider = "prisma-nestjs-graphql"
+  output   = "../src/prisma/@generated/prisma-nestjs-graphql"
+}
+
 model User {
+  /// ID
   id       Int    @id @default(autoincrement())
+  /// UUID
   uuid     String @default(uuid())
+  /// ユーザー名
   name     String
+  /// ユーザーのメールアドレス
   email    String @unique
+  /// ユーザーのパスワード
+  /// @HideField()
   password String
+  /// ユーザーの投稿
   posts    Post[]
 }
 
 model Post {
-  id          Int      @id @default(autoincrement())
-  uuid        String   @default(uuid())
-  title       String
-  description String
-  thumbnail   String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    Int
+  /// ID
+  id        Int      @id @default(autoincrement())
+  /// UUID
+  uuid      String   @default(uuid())
+  /// 投稿タイトル
+  title     String
+  /// 投稿内容
+  content   String
+  /// 投稿サムネイル
+  thumbnail String?
+  /// 公開の有無
+  published Boolean  @default(false)
+  /// 作成日
+  createdAt DateTime @default(now()) @map("created_at")
+  /// 更新日
+  updatedAt DateTime @updatedAt @map("updated_at")
+  /// 作成ユーザー
+  author    User     @relation(fields: [authorId], references: [id])
+  /// 作成ユーザーID
+  authorId  Int
 }
