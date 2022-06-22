@@ -1,0 +1,99 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateUserInput {
+  """ユーザーメールアドレス"""
+  email: String!
+
+  """ユーザー名"""
+  name: String!
+
+  """ユーザーパスワード"""
+  password: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): UserEntity!
+}
+
+type Post {
+  """作成ユーザー"""
+  author: User!
+
+  """作成ユーザーID"""
+  authorId: Int!
+
+  """投稿内容"""
+  content: String!
+
+  """作成日"""
+  createdAt: DateTime!
+
+  """ID"""
+  id: ID!
+
+  """公開の有無"""
+  published: Boolean!
+
+  """投稿サムネイル"""
+  thumbnail: String
+
+  """投稿タイトル"""
+  title: String!
+
+  """更新日"""
+  updatedAt: DateTime!
+
+  """UUID"""
+  uuid: String!
+}
+
+type Query {
+  users: [UserEntity!]!
+}
+
+type User {
+  _count: UserCount!
+
+  """ユーザーのメールアドレス"""
+  email: String!
+
+  """ID"""
+  id: ID!
+
+  """ユーザー名"""
+  name: String!
+
+  """ユーザーの投稿"""
+  posts: [Post!]
+
+  """UUID"""
+  uuid: String!
+}
+
+type UserCount {
+  posts: Int!
+}
+
+type UserEntity {
+  """ユーザーのメールアドレス"""
+  email: String!
+
+  """ID"""
+  id: ID!
+
+  """ユーザー名"""
+  name: String!
+
+  """ユーザーの投稿"""
+  posts: [Post!]
+
+  """UUID"""
+  uuid: String!
+}
