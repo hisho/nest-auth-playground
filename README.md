@@ -1,1 +1,2 @@
-# nest-auth-playground
+# Nest graphql auth
+
