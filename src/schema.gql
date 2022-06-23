@@ -24,10 +24,10 @@ type LoginResponse {
 }
 
 input LoginUserInput {
-  """メールアドレス"""
+  """ユーザーメールアドレス"""
   email: String!
 
-  """パスワード"""
+  """ユーザーパスワード"""
   password: String!
 }
 

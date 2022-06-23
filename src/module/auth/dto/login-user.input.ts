@@ -1,14 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { InputType, PickType } from '@nestjs/graphql';
+import { CreateUserInput } from '../../user/dto/create-user.input';
 
 @InputType()
-export class LoginUserInput {
-  @Field(() => String, { description: 'メールアドレス', nullable: false })
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-
-  @IsNotEmpty()
-  @Field(() => String, { description: 'パスワード', nullable: false })
-  password: string;
-}
+export class LoginUserInput extends PickType(CreateUserInput, [
+  'email',
+  'password',
+]) {}
