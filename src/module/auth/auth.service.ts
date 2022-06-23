@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAuthInput } from './dto/create-auth.input';
-import { UpdateAuthInput } from './dto/update-auth.input';
+import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '../../prisma/prisma.service';
+import { User } from '../user/entities/user.entity';
+import { compareSync } from 'bcrypt';
+import { LoginResponse } from './dto/login-response';
 
 @Injectable()
 export class AuthService {
-  create(createAuthInput: CreateAuthInput) {
-    return 'This action adds a new auth';
+  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
+
+  async validateUser(email: string, password: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({ where: { email: email } });
+
+    if (user && compareSync(password, user.password)) {
+      return user;
+    }
+
+    return null;
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthInput: UpdateAuthInput) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  async login(user: User): Promise<LoginResponse> {
+    return {
+      token: this.jwtService.sign({ uuid: user.uuid }),
+    };
   }
 }

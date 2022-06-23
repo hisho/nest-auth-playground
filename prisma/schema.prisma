@@ -20,7 +20,7 @@ model User {
   /// ID
   id       Int    @id @default(autoincrement())
   /// UUID
-  uuid     String @default(uuid())
+  uuid     String @unique @default(uuid())
   /// ユーザー名
   name     String
   /// ユーザーのメールアドレス

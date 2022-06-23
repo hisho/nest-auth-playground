@@ -2,16 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Auth {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input CreateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 input CreateUserInput {
   """ユーザーメールアドレス"""
   email: String!
@@ -28,11 +18,22 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type LoginResponse {
+  """JWTトークン"""
+  token: String!
+}
+
+input LoginUserInput {
+  """メールアドレス"""
+  email: String!
+
+  """パスワード"""
+  password: String!
+}
+
 type Mutation {
-  createAuth(createAuthInput: CreateAuthInput!): Auth!
   createUser(createUserInput: CreateUserInput!): User!
-  removeAuth(id: Int!): Auth!
-  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
 }
 
 type Post {
@@ -68,14 +69,7 @@ type Post {
 }
 
 type Query {
-  auth(id: Int!): Auth!
   users: [User!]!
-}
-
-input UpdateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
 
 type User {
