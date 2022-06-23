@@ -18,11 +18,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type LoginResponse {
-  """JWTトークン"""
-  token: String!
-}
-
 input LoginUserInput {
   """ユーザーメールアドレス"""
   email: String!
@@ -33,7 +28,7 @@ input LoginUserInput {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  login(loginUserInput: LoginUserInput!): LoginResponse!
+  login(loginUserInput: LoginUserInput!): Token!
 }
 
 type Post {
@@ -70,6 +65,11 @@ type Post {
 
 type Query {
   users: [User!]!
+}
+
+type Token {
+  """JWTトークン"""
+  token: String!
 }
 
 type User {

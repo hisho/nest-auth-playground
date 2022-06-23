@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../user/entities/user.entity';
 import { compareSync } from 'bcrypt';
-import { LoginResponse } from './dto/login-response';
+import { Token } from './entities/token.entity';
 import { UserService } from '../user/user.service';
 import { LoginUserInput } from './dto/login-user.input';
 
@@ -26,7 +26,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User): Promise<LoginResponse> {
+  async login(user: User): Promise<Token> {
     return {
       token: this.jwtService.sign({ uuid: user.uuid }),
     };
