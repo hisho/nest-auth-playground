@@ -4,14 +4,14 @@ import { AuthService } from './auth.service';
 import { LoginResponse } from './dto/login-response';
 import { LoginUserInput } from './dto/login-user.input';
 import { Auth } from './entities/auth.entity';
-import { GqlAuthGuard } from './guards/gql-auth.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Resolver(() => Auth)
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => LoginResponse)
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(LocalAuthGuard)
   async login(
     @Args('loginUserInput') loginUserInput: LoginUserInput,
     @Context() context,
