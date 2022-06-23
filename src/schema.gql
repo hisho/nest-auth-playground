@@ -64,7 +64,7 @@ type Post {
 }
 
 type Query {
-  users: [User!]!
+  me: User!
 }
 
 type Token {
