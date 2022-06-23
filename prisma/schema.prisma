@@ -15,6 +15,7 @@ generator nestgraphql {
   output   = "../src/prisma/@generated/prisma-nestjs-graphql"
 }
 
+/// @ObjectType('UserEntity')
 model User {
   /// ID
   id       Int    @id @default(autoincrement())

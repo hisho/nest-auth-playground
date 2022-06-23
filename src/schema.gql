@@ -19,12 +19,12 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): UserEntity!
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
 type Post {
   """作成ユーザー"""
-  author: User!
+  author: UserEntity!
 
   """作成ユーザーID"""
   authorId: Int!
@@ -55,12 +55,10 @@ type Post {
 }
 
 type Query {
-  users: [UserEntity!]!
+  users: [User!]!
 }
 
 type User {
-  _count: UserCount!
-
   """ユーザーのメールアドレス"""
   email: String!
 
@@ -82,6 +80,8 @@ type UserCount {
 }
 
 type UserEntity {
+  _count: UserCount!
+
   """ユーザーのメールアドレス"""
   email: String!
 
