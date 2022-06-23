@@ -4,12 +4,19 @@ import { User } from '../user/entities/user.entity';
 import { compareSync } from 'bcrypt';
 import { LoginResponse } from './dto/login-response';
 import { UserService } from '../user/user.service';
+import { LoginUserInput } from './dto/login-user.input';
 
 @Injectable()
 export class AuthService {
-  constructor(private user: UserService, private jwtService: JwtService) {}
+  constructor(
+    private readonly user: UserService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  async validateUser(email: string, password: string): Promise<User | null> {
+  async validateUser(
+    email: LoginUserInput['email'],
+    password: LoginUserInput['password'],
+  ): Promise<User | null> {
     const user = await this.user.findByEmail(email);
 
     if (user && compareSync(password, user.password)) {
