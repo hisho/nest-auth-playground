@@ -36,7 +36,7 @@ model Post {
   /// ID
   id        Int      @id @default(autoincrement())
   /// UUID
-  uuid      String   @default(uuid())
+  uuid      String   @unique @default(uuid())
   /// 投稿タイトル
   title     String
   /// 投稿内容
