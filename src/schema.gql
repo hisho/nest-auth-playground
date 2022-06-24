@@ -112,6 +112,7 @@ type PostEntity {
 
 type Query {
   me: User!
+  posts: [Post!]!
 }
 
 type Token {

@@ -7,6 +7,17 @@ import { User } from '../user/entities/user.entity';
 export class PostService {
   constructor(private readonly prisma: PrismaService) {}
 
+  findAll(currentUser: User) {
+    return this.prisma.post.findMany({
+      where: {
+        authorId: currentUser.id,
+      },
+      include: {
+        author: true,
+      },
+    });
+  }
+
   create(createPostInput: CreatePostInput, currentUser: User) {
     return this.prisma.post.create({
       data: {
