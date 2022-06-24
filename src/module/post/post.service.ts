@@ -18,10 +18,11 @@ export class PostService {
     });
   }
 
-  findOne(uuid: string) {
-    return this.prisma.post.findUnique({
+  findOne(uuid: string, isPublished?: boolean) {
+    return this.prisma.post.findFirst({
       where: {
         uuid,
+        published: isPublished,
       },
       include: {
         author: true,
