@@ -43,6 +43,7 @@ export class UserService {
     });
   }
 
+  //TODO postがある場合でも削除するように変更
   delete(currentUser: User) {
     return this.prisma.user.delete({
       where: {
