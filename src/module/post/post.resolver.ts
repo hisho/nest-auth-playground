@@ -39,4 +39,10 @@ export class PostResolver {
   ) {
     return this.postService.update(uuid, createPostInput);
   }
+
+  @Mutation(() => Post, { description: '投稿を削除' })
+  @UseGuards(JwtAuthGuard)
+  deletePost(@Args('uuid', { description: '投稿のuuid' }) uuid: string) {
+    return this.postService.delete(uuid);
+  }
 }

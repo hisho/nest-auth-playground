@@ -63,4 +63,15 @@ export class PostService {
       },
     });
   }
+
+  delete(uuid: string) {
+    return this.prisma.post.delete({
+      where: {
+        uuid,
+      },
+      include: {
+        author: true,
+      },
+    });
+  }
 }
