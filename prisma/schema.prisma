@@ -32,6 +32,7 @@ model User {
   posts    Post[]
 }
 
+/// @ObjectType('PostEntity')
 model Post {
   /// ID
   id        Int      @id @default(autoincrement())
@@ -52,5 +53,5 @@ model Post {
   /// 作成ユーザー
   author    User     @relation(fields: [authorId], references: [id])
   /// 作成ユーザーID
-  authorId  Int
+  authorId  Int      @map("author_id")
 }

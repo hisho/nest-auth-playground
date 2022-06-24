@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreatePostInput {
+  """投稿内容"""
+  content: String!
+
+  """公開かどうか"""
+  published: Boolean!
+
+  """投稿のサムネイル"""
+  thumbnail: String!
+
+  """投稿タイトル"""
+  title: String!
+}
+
 input CreateUserInput {
   """ユーザーメールアドレス"""
   email: String!
@@ -27,11 +41,44 @@ input LoginUserInput {
 }
 
 type Mutation {
+  createPost(createPostInput: CreatePostInput!): Post!
   createUser(createUserInput: CreateUserInput!): User!
   login(loginUserInput: LoginUserInput!): Token!
 }
 
 type Post {
+  """作成ユーザー"""
+  author: UserEntity!
+
+  """作成ユーザーID"""
+  authorId: Int!
+
+  """投稿内容"""
+  content: String!
+
+  """作成日"""
+  createdAt: DateTime!
+
+  """ID"""
+  id: ID!
+
+  """公開の有無"""
+  published: Boolean!
+
+  """投稿サムネイル"""
+  thumbnail: String
+
+  """投稿タイトル"""
+  title: String!
+
+  """更新日"""
+  updatedAt: DateTime!
+
+  """UUID"""
+  uuid: String!
+}
+
+type PostEntity {
   """作成ユーザー"""
   author: UserEntity!
 
@@ -83,7 +130,7 @@ type User {
   name: String!
 
   """ユーザーの投稿"""
-  posts: [Post!]
+  posts: [PostEntity!]
 
   """UUID"""
   uuid: String!
@@ -106,7 +153,7 @@ type UserEntity {
   name: String!
 
   """ユーザーの投稿"""
-  posts: [Post!]
+  posts: [PostEntity!]
 
   """UUID"""
   uuid: String!
