@@ -41,9 +41,18 @@ input LoginUserInput {
 }
 
 type Mutation {
+  """投稿を作成"""
   createPost(createPostInput: CreatePostInput!): Post!
   createUser(createUserInput: CreateUserInput!): User!
   login(loginUserInput: LoginUserInput!): Token!
+
+  """投稿を更新"""
+  updatePost(
+    createPostInput: CreatePostInput!
+
+    """投稿のuuid"""
+    uuid: String!
+  ): Post!
 }
 
 type Post {
@@ -112,7 +121,11 @@ type PostEntity {
 
 type Query {
   me: User!
+
+  """ユーザーに紐付いている投稿の詳細取得"""
   post(uuid: String!): Post!
+
+  """ユーザーに紐付いている投稿すべて取得"""
   posts: [Post!]!
 }
 

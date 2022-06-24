@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreatePostInput } from './dto/create-post.input';
 import { PrismaService } from '../../prisma/prisma.service';
 import { User } from '../user/entities/user.entity';
+import { UpdatePostInput } from './dto/update-post.input';
 
 @Injectable()
 export class PostService {
@@ -41,6 +42,21 @@ export class PostService {
             id: currentUser.id,
           },
         },
+      },
+      include: {
+        author: true,
+      },
+    });
+  }
+
+  update(uuid: string, updatePostInput: UpdatePostInput) {
+    return this.prisma.post.update({
+      where: {
+        uuid,
+      },
+      data: {
+        ...updatePostInput,
+        updatedAt: new Date(),
       },
       include: {
         author: true,

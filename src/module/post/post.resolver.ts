@@ -30,4 +30,13 @@ export class PostResolver {
   ) {
     return this.postService.create(createPostInput, user);
   }
+
+  @Mutation(() => Post, { description: '投稿を更新' })
+  @UseGuards(JwtAuthGuard)
+  updatePost(
+    @Args('uuid', { description: '投稿のuuid' }) uuid: string,
+    @Args('createPostInput') createPostInput: CreatePostInput,
+  ) {
+    return this.postService.update(uuid, createPostInput);
+  }
 }
