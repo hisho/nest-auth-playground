@@ -17,6 +17,11 @@ export class PostResolver {
     return this.postService.findAll(user);
   }
 
+  @Query(() => Post)
+  post(@Args('uuid') uuid: string) {
+    return this.postService.findOne(uuid);
+  }
+
   @Mutation(() => Post)
   @UseGuards(JwtAuthGuard)
   createPost(

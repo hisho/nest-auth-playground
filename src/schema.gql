@@ -112,6 +112,7 @@ type PostEntity {
 
 type Query {
   me: User!
+  post(uuid: String!): Post!
   posts: [Post!]!
 }
 

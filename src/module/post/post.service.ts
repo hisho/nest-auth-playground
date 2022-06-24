@@ -18,6 +18,17 @@ export class PostService {
     });
   }
 
+  findOne(uuid: string) {
+    return this.prisma.post.findUnique({
+      where: {
+        uuid,
+      },
+      include: {
+        author: true,
+      },
+    });
+  }
+
   create(createPostInput: CreatePostInput, currentUser: User) {
     return this.prisma.post.create({
       data: {
