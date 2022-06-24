@@ -11,18 +11,18 @@ import { CurrentUser } from '../../decorators/CurrentUser';
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
-  @Query(() => [Post])
+  @Query(() => [Post], { description: 'ユーザーに紐付いている投稿すべて取得' })
   @UseGuards(JwtAuthGuard)
   posts(@CurrentUser() user: User) {
     return this.postService.findAll(user);
   }
 
-  @Query(() => Post)
+  @Query(() => Post, { description: 'ユーザーに紐付いている投稿の詳細取得' })
   post(@Args('uuid') uuid: string) {
     return this.postService.findOne(uuid);
   }
 
-  @Mutation(() => Post)
+  @Mutation(() => Post, { description: '投稿を作成' })
   @UseGuards(JwtAuthGuard)
   createPost(
     @Args('createPostInput') createPostInput: CreatePostInput,
