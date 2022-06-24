@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { PrismaService } from '../../prisma/prisma.service';
 import { hash } from 'bcrypt';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -38,6 +39,17 @@ export class UserService {
         name,
         password: await hash(password, 10),
         email,
+      },
+    });
+  }
+
+  delete(currentUser: User) {
+    return this.prisma.user.delete({
+      where: {
+        uuid: currentUser.uuid,
+      },
+      include: {
+        posts: true,
       },
     });
   }

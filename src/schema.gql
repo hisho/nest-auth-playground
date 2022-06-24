@@ -50,6 +50,9 @@ type Mutation {
     """投稿のuuid"""
     uuid: String!
   ): Post!
+
+  """ユーザーを削除"""
+  deleteUser: User!
   login(loginUserInput: LoginUserInput!): Token!
 
   """投稿を更新"""

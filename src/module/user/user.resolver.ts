@@ -20,4 +20,10 @@ export class UserResolver {
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.userService.create(createUserInput);
   }
+
+  @Mutation(() => User, { description: 'ユーザーを削除' })
+  @UseGuards(JwtAuthGuard)
+  deleteUser(@CurrentUser() user: User) {
+    return this.userService.delete(user);
+  }
 }
