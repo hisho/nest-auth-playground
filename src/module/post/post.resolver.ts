@@ -11,9 +11,16 @@ import { CurrentUser } from '../../decorators/CurrentUser';
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
-  @Query(() => [Post], { description: 'ユーザーに紐付いている投稿すべて取得' })
+  @Query(() => [Post], { description: '公開済みの投稿すべて取得' })
+  posts() {
+    return this.postService.findAllPublished();
+  }
+
+  @Query(() => [Post], {
+    description: '認証ユーザーに紐付いている投稿すべて取得',
+  })
   @UseGuards(JwtAuthGuard)
-  posts(@CurrentUser() user: User) {
+  userPosts(@CurrentUser() user: User) {
     return this.postService.findAll(user);
   }
 

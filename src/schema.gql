@@ -134,8 +134,11 @@ type Query {
   """ユーザーに紐付いている投稿の詳細取得"""
   post(uuid: String!): Post!
 
-  """ユーザーに紐付いている投稿すべて取得"""
+  """公開済みの投稿すべて取得"""
   posts: [Post!]!
+
+  """認証ユーザーに紐付いている投稿すべて取得"""
+  userPosts: [Post!]!
 }
 
 type Token {

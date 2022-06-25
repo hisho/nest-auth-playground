@@ -8,6 +8,17 @@ import { UpdatePostInput } from './dto/update-post.input';
 export class PostService {
   constructor(private readonly prisma: PrismaService) {}
 
+  findAllPublished() {
+    return this.prisma.post.findMany({
+      where: {
+        published: true,
+      },
+      include: {
+        author: true,
+      },
+    });
+  }
+
   findAll(currentUser: User) {
     return this.prisma.post.findMany({
       where: {
