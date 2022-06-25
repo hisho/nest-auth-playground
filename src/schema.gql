@@ -65,8 +65,7 @@ type Mutation {
 }
 
 type Post {
-  """作成ユーザー"""
-  author: UserEntity!
+  author: User!
 
   """作成ユーザーID"""
   authorId: Int!
